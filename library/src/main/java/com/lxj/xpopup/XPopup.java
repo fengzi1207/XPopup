@@ -851,12 +851,30 @@ public class XPopup {
             return popupView;
         }
 
+        public BottomListPopupView asBottomList(CharSequence title, String[] data, int[] iconIds, int checkedPosition, OnSelectListener selectListener, int bindLayoutId,
+                                                int bindItemLayoutId,Boolean isShowCancel) {
+            BottomListPopupView popupView = new BottomListPopupView(this.context, bindLayoutId, bindItemLayoutId,isShowCancel)
+                    .setStringData(title, data, iconIds)
+                    .setCheckedPosition(checkedPosition)
+                    .setOnSelectListener(selectListener);
+            popupView.popupInfo = this.popupInfo;
+            return popupView;
+        }
+
         public BottomListPopupView asBottomList(CharSequence title, String[] data, int[] iconIds, int checkedPosition, OnSelectListener selectListener) {
             return asBottomList(title, data, iconIds, checkedPosition, selectListener, 0, 0);
         }
 
+        public BottomListPopupView asBottomList(CharSequence title, String[] data, int[] iconIds, int checkedPosition,Boolean isShowCancel, OnSelectListener selectListener) {
+            return asBottomList(title, data, iconIds, checkedPosition, selectListener, 0, 0,isShowCancel);
+        }
+
         public BottomListPopupView asBottomList(CharSequence title, String[] data, OnSelectListener selectListener) {
             return asBottomList(title, data, null, -1, selectListener);
+        }
+
+        public BottomListPopupView asBottomList(CharSequence title, String[] data,Boolean isShowCancel, OnSelectListener selectListener) {
+            return asBottomList(title, data, null, -1,isShowCancel, selectListener);
         }
 
         public BottomListPopupView asBottomList(CharSequence title, String[] data, int[] iconIds, OnSelectListener selectListener) {

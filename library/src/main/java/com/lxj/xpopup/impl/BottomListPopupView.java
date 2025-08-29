@@ -38,6 +38,7 @@ public class BottomListPopupView extends BottomPopupView {
     protected int bindLayoutId;
     protected int bindItemLayoutId;
 
+    boolean isShowCancel = true;
     /**
      *
      * @param context
@@ -48,6 +49,20 @@ public class BottomListPopupView extends BottomPopupView {
         super(context);
         this.bindLayoutId = bindLayoutId;
         this.bindItemLayoutId = bindItemLayoutId;
+        addInnerContent();
+    }
+
+    /**
+     *
+     * @param context
+     * @param bindLayoutId layoutId 要求layoutId中必须有一个id为recyclerView的RecyclerView，如果你需要显示标题，则必须有一个id为tv_title的TextView
+     * @param bindItemLayoutId itemLayoutId 条目的布局id，要求布局中有id为iv_image的ImageView（非必须），和id为tv_text的TextView
+     */
+    public BottomListPopupView(@NonNull Context context, int bindLayoutId, int bindItemLayoutId,boolean isShowCancel ) {
+        super(context);
+        this.bindLayoutId = bindLayoutId;
+        this.bindItemLayoutId = bindItemLayoutId;
+        this.isShowCancel = isShowCancel;
         addInnerContent();
     }
 
@@ -73,6 +88,11 @@ public class BottomListPopupView extends BottomPopupView {
                     dismiss();
                 }
             });
+            tv_cancel.setVisibility(isShowCancel?VISIBLE:GONE);
+        }
+
+        if(vv_divider !=null){
+            vv_divider.setVisibility(isShowCancel ? VISIBLE : GONE);
         }
 
         if(tv_title!=null){
